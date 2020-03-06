@@ -1,0 +1,29 @@
+{
+  "name": "yastjson",
+  "version": "0.0.1",
+  "description": "yet another fast json library.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/smooson.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuyingda/yastjson.git"
+  },
+  "keywords": [
+    "fast-json",
+    "json-parser"
+  ],
+  "author": "zhuyingda",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/zhuyingda/yastjson/issues"
+  },
+  "homepage": "https://github.com/zhuyingda/yastjson#readme",
+  "devDependencies": {
+    "mocha": "^7.1.0"
+  }
+}
