@@ -19,4 +19,4 @@ let obj = YJSON.parse(jsonString);
 console.log(obj);
 ```
 
-You will get the object, just like use `JSON.parse`.
+You will get the object, just like using `JSON.parse`.
