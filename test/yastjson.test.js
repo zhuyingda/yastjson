@@ -14,16 +14,15 @@
  */
 const assert = require('assert');
 
-describe('smooson unit test', function() {
-    const { Tokenizer } = require('../lib/Smooson');
-    const { AST } = require('../lib/Smooson');
+describe('yastjson unit test', function() {
+    const { Tokenizer, AST, parse } = require('../index');
 
-    describe('test sample array', function() {
+    describe('test sample array:', function() {
         const json = '{"arr": [1, 2, 3]}';
         const tokenizer = new Tokenizer();
         const tokens = tokenizer.tokenize(json);
 
-        it('lexical analysis result', function () {
+        it('test lexical analysis result', function () {
             assert.equal(tokens[0].getText(), '{');
             assert.equal(tokens[1].getText(), '"arr"');
             assert.equal(tokens[2].getText(), ':');
@@ -40,7 +39,7 @@ describe('smooson unit test', function() {
         const astHandler = new AST(tokens);
         const ast = astHandler.buildTree();
 
-        it('syntax parsing result', function () {
+        it('test syntax parsing result', function () {
             assert.equal(ast.type, 'json');
             assert.equal(ast.childNodeList[0].type, 'object');
             assert.equal(ast.childNodeList[0].childNodeList[0].type, 'prop');
@@ -58,14 +57,19 @@ describe('smooson unit test', function() {
             assert.equal(arrayNode.childNodeList[2].value.type, 'number');
             assert.equal(arrayNode.childNodeList[2].value.tokens[0].getText(), '3');
         });
+
+        it('test output result', function () {
+            let jsonGet = parse(json);
+            assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
+        });
     });
 
-    describe('test sample object', function() {
+    describe('test sample object:', function() {
         const json = '{"a":1, "b":2, "c":3}';
         const tokenizer = new Tokenizer();
         const tokens = tokenizer.tokenize(json);
 
-        it('lexical analysis result', function () {
+        it('test lexical analysis result', function () {
             assert.equal(tokens[0].getText(), '{');
             assert.equal(tokens[1].getText(), '"a"');
             assert.equal(tokens[2].getText(), ':');
@@ -84,7 +88,7 @@ describe('smooson unit test', function() {
         const astHandler = new AST(tokens);
         const ast = astHandler.buildTree();
 
-        it('syntax parsing result', function () {
+        it('test syntax parsing result', function () {
             assert.equal(ast.type, 'json');
             assert.equal(ast.childNodeList[0].type, 'object');
             const objectNode = ast.childNodeList[0];
@@ -103,6 +107,41 @@ describe('smooson unit test', function() {
             assert.equal(objectNode.childNodeList[2].childNodeList[0].type, 'value');
             assert.equal(objectNode.childNodeList[2].childNodeList[0].value.type, 'number');
             assert.equal(objectNode.childNodeList[2].childNodeList[0].value.tokens[0].getText(), '3');
+        });
+
+        it('test output result', function () {
+            let jsonGet = parse(json);
+            assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
+        });
+    });
+
+    describe('test more complex cases:', function() {
+        it('test yastjson output result', function () {
+            const json = JSON.stringify({
+                complex1: [
+                    1,2,3,4
+                ],
+                complex2: {
+                    p1: null,
+                    p2: false,
+                    p3: 'false',
+                    p4: 123,
+                    p5: -125,
+                    p6: 3.141592653589793238462643
+                }
+            });
+            let jsonGet = parse(json);
+            assert.equal(json, JSON.stringify(jsonGet));
+        });
+        it('test yastjson output result', function () {
+            const json = '{"a":     1, "b 2": 2,"c":                 "efg"                   }';
+            let jsonGet = parse(json);
+            assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
+        });
+        it('test yastjson output result', function () {
+            const json = '{"a": -1, "b": 124, "c": -0.1111111, "d":-11111111111, "e":0 }';
+            let jsonGet = parse(json);
+            assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
         });
     });
 });
