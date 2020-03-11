@@ -1,5 +1,5 @@
 # yastjson
-Yastjson is *Y*et *A*nother f*A*st *JSON*, which provide you a high-performaince `JSON.parse` method instead of the native function in Node.js.
+Yastjson is **Y**et **A**nother f**A**st **JSON**, which provide you a high-performaince `JSON.parse` method instead of the native function in Node.js.
 
 Installation:
 
