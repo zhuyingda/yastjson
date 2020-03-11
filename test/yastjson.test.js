@@ -134,12 +134,36 @@ describe('yastjson unit test', function() {
             assert.equal(json, JSON.stringify(jsonGet));
         });
         it('test yastjson output result', function () {
+            const json = JSON.stringify({
+                complex1: [
+                    {
+                        a: -1
+                    },
+                    2,
+                    {
+                        b: false
+                    },
+                    null,
+                    {
+                        c: 'xyz'
+                    }
+                ]
+            });
+            let jsonGet = parse(json);
+            assert.equal(json, JSON.stringify(jsonGet));
+        });
+        it('test yastjson output result', function () {
             const json = '{"a":     1, "b 2": 2,"c":                 "efg"                   }';
             let jsonGet = parse(json);
             assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
         });
         it('test yastjson output result', function () {
             const json = '{"a": -1, "b": 124, "c": -0.1111111, "d":-11111111111, "e":0 }';
+            let jsonGet = parse(json);
+            assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
+        });
+        it('test yastjson output result', function () {
+            const json = '{"empty_obj":{},"empty_arr":[]}';
             let jsonGet = parse(json);
             assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
         });

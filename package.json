@@ -1,6 +1,6 @@
 {
   "name": "yastjson",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "yet another fast json library.",
   "main": "index.js",
   "directories": {
