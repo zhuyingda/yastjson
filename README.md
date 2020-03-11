@@ -1,7 +1,7 @@
 # yastjson
 Yastjson is **Y**et **A**nother fA**s**t **JSON**, which provide you a high-performaince `JSON.parse` method instead of the native function in Node.js.
 
-Installation:
+## Installation:
 
 ```
 npm install
@@ -9,7 +9,11 @@ npm install
 npm test
 ```
 
-Usage:
+or
+
+clone [github repository](https://github.com/zhuyingda/yastjson)
+
+## Usage:
 
 ```
 const YJSON = require('yastjson');
