@@ -4,7 +4,7 @@ Yastjson is **Y**et **A**nother fA**s**t **JSON**, which provide you a high-perf
 ## Installation:
 
 ```
-npm install
+npm install yastjson
 
 npm test
 ```
