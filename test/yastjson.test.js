@@ -15,7 +15,9 @@
 const assert = require('assert');
 
 describe('yastjson unit test', function() {
-    const { Tokenizer, AST, parse } = require('../index');
+    const { Tokenizer, AST, ASTNode, ASTParser, parse } = require('../index');
+    const ExprType = require('../lib/expression').ExprType;
+    const { TokenType, Token } = require('../lib/token');
 
     describe('test sample array:', function() {
         const json = '{"arr": [1, 2, 3]}';
@@ -145,7 +147,8 @@ describe('yastjson unit test', function() {
                     },
                     null,
                     {
-                        c: 'xyz'
+                        c: 'xyz',
+                        d: true
                     }
                 ]
             });
@@ -166,6 +169,56 @@ describe('yastjson unit test', function() {
             const json = '{"empty_obj":{},"empty_arr":[]}';
             let jsonGet = parse(json);
             assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
+        });
+    });
+
+    describe('test for errors thrown:', function() {
+        it('test error thrown for tokenizer', function () {
+            const tokenizer = new Tokenizer();
+            const json = '{"fake_false": falsx, "real_false": false}';
+            let err = new Error('state FALSE, unexpected token x');
+            assert.throws(() => tokenizer.tokenize(json), err);
+        });
+
+        it('test error thrown for tokenizer', function () {
+            const tokenizer = new Tokenizer();
+            const json = '{"fake_true": trux}';
+            let err = new Error('state TRUE, unexpected token x');
+            assert.throws(() => tokenizer.tokenize(json), err);
+        });
+
+        it('test error thrown for ASTParser', function () {
+            let fakeAst = new ASTNode([], 'faketype', null);;
+            const astParser = new ASTParser(fakeAst);
+            let err = new Error('[parse AST error] unexpected node type, expect Json');
+            assert.throws(() => astParser.getJson(), err);
+        });
+
+        it('test error thrown for ASTParser', function () {
+            let fakeAstNode = new ASTNode([
+                new Token('faketrue', TokenType.Boolean)
+            ], TokenType.Boolean, null);;
+            const astParser = new ASTParser();
+            let err = new Error('[parse AST error] unexpected boolean node value');
+            assert.throws(() => astParser.handleValue(fakeAstNode), err);
+        });
+
+        it('test error thrown for ASTParser', function () {
+            let fakeAstNode = new ASTNode([
+                new Token('fake100', TokenType.Number)
+            ], TokenType.Number, null);;
+            const astParser = new ASTParser();
+            let err = new Error('[parse AST error] unexpected number node value');
+            assert.throws(() => astParser.handleValue(fakeAstNode), err);
+        });
+
+        it('test error thrown for ASTParser', function () {
+            let fakeAstNode = new ASTNode([
+                new Token('fake', TokenType.String)
+            ], 'faketype', null);;
+            const astParser = new ASTParser();
+            let err = new Error('[parse AST error] unexpected node type, expect a valid Value node');
+            assert.throws(() => astParser.handleValue(fakeAstNode), err);
         });
     });
 });
