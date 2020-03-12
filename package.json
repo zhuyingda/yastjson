@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/zhuyingda/yastjson#readme",
   "devDependencies": {
-    "mocha": "^7.1.0"
+    "mocha": "^7.1.0",
+    "nyc": "^15.0.0"
   }
 }
