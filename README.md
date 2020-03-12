@@ -28,3 +28,20 @@ console.log(obj);
 ```
 
 You will get the object, just like using `JSON.parse`.
+
+## Design
+
+### Token Definition
+![](https://www.zhuyingda.com/static/img/yastjson-token.svg)
+
+### Lexical Analysis
+![](https://www.zhuyingda.com/static/img/yastjson-fsm.svg)
+
+### Syntactic Analysis
+![](https://www.zhuyingda.com/static/img/yastjson-bnf.svg)
+
+## License
+
+[GPL-V3](http://www.gnu.org/licenses/)
+
+Copyright (c) 2020-present, Yingda (Sugar) Zhu
