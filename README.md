@@ -1,5 +1,6 @@
 # yastjson
 [![npm version](https://badge.fury.io/js/yastjson.svg)](https://badge.fury.io/js/yastjson)
+[![Build Status](https://travis-ci.org/zhuyingda/yastjson.svg?branch=master)](https://travis-ci.org/zhuyingda/yastjson)
 
 ## Overview
 Yastjson is **Y**et **A**nother fa**ST** **JSON**, which provide you a high-performaince `JSON.parse` method instead of the native function in Node.js.
