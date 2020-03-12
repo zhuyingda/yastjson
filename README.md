@@ -22,7 +22,7 @@ clone [github repository](https://github.com/zhuyingda/yastjson)
 ```
 const YJSON = require('yastjson');
 
-let jsonString = '{a:1}';
+let jsonString = '{"a":1}';
 let obj = YJSON.parse(jsonString);
 console.log(obj);
 ```
