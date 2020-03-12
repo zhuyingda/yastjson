@@ -9,7 +9,6 @@ script:
   - npm run coverage
   - node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
   - codecov
-  - npm run test
 cache:
   directories:
     - node_modules
