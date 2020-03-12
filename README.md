@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zhuyingda/yastjson.svg?branch=master)](https://travis-ci.org/zhuyingda/yastjson)
 
 ## Overview
-Yastjson is **Y**et **A**nother fa**ST** **JSON**, which provide you a high-performaince `JSON.parse` method instead of the native function in Node.js.
+Yastjson is **Y**et **A**nother fa**ST** **JSON**, which provide you a second choice of `JSON.parse` method instead of the native function in Node.js.
 
 ## Installation
 
