@@ -1,6 +1,7 @@
 # yastjson
 [![npm version](https://badge.fury.io/js/yastjson.svg)](https://badge.fury.io/js/yastjson)
 [![Build Status](https://travis-ci.org/zhuyingda/yastjson.svg?branch=master)](https://travis-ci.org/zhuyingda/yastjson)
+[![codecov](https://codecov.io/gh/zhuyingda/yastjson/branch/master/graph/badge.svg)](https://codecov.io/gh/zhuyingda/yastjson)
 
 ## Overview
 Yastjson is **Y**et **A**nother fa**ST** **JSON**, which provide you a second choice of `JSON.parse` method instead of the native function in Node.js.

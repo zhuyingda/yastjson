@@ -6,7 +6,8 @@ install:
   - npm i
   - npm i -g codecov
 script:
-  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - npm run coverage
+  - node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
   - codecov
   - npm run test
 cache:
