@@ -170,6 +170,11 @@ describe('yastjson unit test', function() {
             let jsonGet = parse(json);
             assert.equal(JSON.stringify(JSON.parse(json)), JSON.stringify(jsonGet));
         });
+        it('test yastjson output result', function () {
+            const json = '{"comp_str": "give a quote \\"here\\", is everything alright?"}';
+            let jsonGet = parse(json);
+            assert.equal(jsonGet.comp_str, 'give a quote \\"here\\", is everything alright?');
+        });
     });
 
     describe('test for errors thrown:', function() {
@@ -219,6 +224,32 @@ describe('yastjson unit test', function() {
             const astParser = new ASTParser();
             let err = new Error('[parse AST error] unexpected node type, expect a valid Value node');
             assert.throws(() => astParser.handleValue(fakeAstNode), err);
+        });
+
+        it('test error thrown for AST', function () {
+            let fakeTokens = [
+                new Token('fake', TokenType.String)
+            ];
+            let err = new Error('[json expression error] unexpected token fake');
+            assert.throws(() => new AST(fakeTokens), err);
+        });
+
+        it('test error thrown for AST', function () {
+            let fakeTokens = [
+                new Token('[', TokenType.LeftBracket),
+                new Token('}', TokenType.RightBrace)
+            ];
+            let err = new Error('[array expression error] wrong bracket token');
+            assert.throws(() => new AST(fakeTokens), err);
+        });
+
+        it('test error thrown for AST', function () {
+            let fakeTokens = [
+                new Token('{', TokenType.LeftBrace),
+                new Token(']', TokenType.RightBracket)
+            ];
+            let err = new Error('[object expression error] wrong brace token');
+            assert.throws(() => new AST(fakeTokens), err);
         });
     });
 });
