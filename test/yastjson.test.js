@@ -36,6 +36,8 @@ describe('yastjson unit test', function() {
             assert.equal(tokens[8].getText(), '3');
             assert.equal(tokens[9].getText(), ']');
             assert.equal(tokens[10].getText(), '}');
+            assert.equal(tokens[10].getPosition().line, 1);
+            assert.equal(tokens[10].getPosition().column, 17);
         });
 
         const astHandler = new AST(tokens);
@@ -85,6 +87,8 @@ describe('yastjson unit test', function() {
             assert.equal(tokens[10].getText(), ':');
             assert.equal(tokens[11].getText(), '3');
             assert.equal(tokens[12].getText(), '}');
+            assert.equal(tokens[12].getPosition().line, 1);
+            assert.equal(tokens[12].getPosition().column, 20);
         });
 
         const astHandler = new AST(tokens);
@@ -250,6 +254,33 @@ describe('yastjson unit test', function() {
             ];
             let err = new Error('[object expression error] wrong brace token');
             assert.throws(() => new AST(fakeTokens), err);
+        });
+    });
+
+    describe('test multiple line json:', function() {
+        const json = `
+        {
+            "a": false,
+            "bb": 12.3,
+            "ccc": "abcdefg",
+            "dddd": {
+                "e": [
+                    1,
+                    2,
+                    3.1415926
+                ]
+            }
+        }
+        `;
+        const tokenizer = new Tokenizer();
+        const tokens = tokenizer.tokenize(json);
+
+        it('test lexical analysis result', function () {
+            assert.equal(tokens[0].getText(), '{');
+            assert.equal(tokens[23].getText(), '3.1415926');
+            assert.equal(tokens[23].getPosition().line, 10);
+            assert.equal(tokens[23].getPosition().column, 20);
+            // console.log(tokens[23].getPosition());
         });
     });
 });
